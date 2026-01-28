@@ -16,12 +16,14 @@ import org.slf4j.LoggerFactory;
 import mg.cico.models.Projet;
 import mg.cico.models.criteria.ProjetSearchCriteria;
 import mg.cico.models.enums.Statut;
-import mg.cico.utils.DBConnection;
 
 public class ProjetDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(ProjetDAO.class);
-    private final Connection c = DBConnection.startConnection();
+    private final Connection c ;
+    public ProjetDAO(Connection nc){
+        this.c = nc;
+    }
 
     public void createProjet(Projet p) {
         String sql = """
@@ -47,7 +49,7 @@ public class ProjetDAO {
             stmt.setDate(9, Date.valueOf(p.getDateFin()));
             stmt.setInt(10, p.getAvancement());
             stmt.setString(11, p.getResponsable());
-            stmt.setObject(12, p.getStatut());
+            stmt.setObject(12, p.getStatut().name());
             stmt.execute();
 
             logger.debug("Projet créé avec succès: {}", p.getTitre());

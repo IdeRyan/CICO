@@ -16,12 +16,14 @@ import org.slf4j.LoggerFactory;
 import mg.cico.models.Article;
 import mg.cico.models.criteria.ArticleSearchCriteria;
 import mg.cico.models.enums.Etat;
-import mg.cico.utils.DBConnection;
 
 public class ArticleDAO {
-    
-    private final Connection c = DBConnection.startConnection();
     private final Logger logger = LoggerFactory.getLogger(ArticleDAO.class);
+    private final Connection c ;
+    public ArticleDAO(Connection nc){
+        this.c = nc;
+    }
+    
 
     // Ajouter un article
     public void addArticle(Article a){
