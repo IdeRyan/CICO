@@ -1,10 +1,14 @@
 package mg.cico.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import mg.cico.models.enums.Statut;
 
 public class Projet {
     private int idProjet;
     private String titre;
+    private String lieu;
     private String numeroDevis;
     private LocalDate dateDevis;
     private String numeroBC;
@@ -14,46 +18,15 @@ public class Projet {
     private LocalDate dateFin;
     private int avancement;
     private String responsable;
-    private String Statut;
-
+    private Statut Statut;
+    private LocalDateTime dernierMaj;
     
-    public Projet(int idProjet, String titre, String numeroDevis, LocalDate dateDevis, String numeroBC,
-            LocalDate dateBC, int delaiExecution, LocalDate dateDebut, LocalDate dateFin, int avancement,
-            String responsable, String statut) {
-        this.idProjet = idProjet;
-        this.titre = titre;
-        this.numeroDevis = numeroDevis;
-        this.dateDevis = dateDevis;
-        this.numeroBC = numeroBC;
-        this.dateBC = dateBC;
-        this.delaiExecution = delaiExecution;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.avancement = avancement;
-        this.responsable = responsable;
-        Statut = statut;
-    }
-
-    
-    public Projet(String titre, String numeroDevis, LocalDate dateDevis, String numeroBC, LocalDate dateBC,
-            int delaiExecution, LocalDate dateDebut, LocalDate dateFin, int avancement, String responsable,
-            String statut) {
-        this.titre = titre;
-        this.numeroDevis = numeroDevis;
-        this.dateDevis = dateDevis;
-        this.numeroBC = numeroBC;
-        this.dateBC = dateBC;
-        this.delaiExecution = delaiExecution;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.avancement = avancement;
-        this.responsable = responsable;
-        Statut = statut;
-    }
-
-
     public int getIdProjet() {
         return idProjet;
+    }
+
+    public void setIdProjet(Integer idProjet) {
+        this.idProjet = idProjet;
     }
 
     public String getTitre() {
@@ -118,12 +91,33 @@ public class Projet {
         this.responsable = responsable;
     }
 
-    public String getStatut() {
+    public Statut getStatut() {
         return Statut;
     }
 
-    public void setStatut(String Statut) {
-        this.Statut = Statut;
+    public void setStatut(Object Statut) {
+        this.Statut = (Statut)Statut;
+    }
+
+
+    public void setIdProjet(int idProjet) {
+        this.idProjet = idProjet;
+    }
+
+    public LocalDateTime getDernierMaj() {
+        return dernierMaj;
+    }
+
+    public void setDernierMaj(LocalDateTime dernierMaj) {
+        this.dernierMaj = dernierMaj;
+    }
+
+    public String getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
     }
 
     

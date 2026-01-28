@@ -17,5 +17,7 @@ public class DBConnection {
             System.out.println("Error while trying to connect to database: "+e.getMessage());
             return null;
         }
+
+        
     }
 }
