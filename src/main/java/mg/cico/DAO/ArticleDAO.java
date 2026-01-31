@@ -17,7 +17,7 @@ import mg.cico.models.Article;
 import mg.cico.models.criteria.ArticleSearchCriteria;
 import mg.cico.models.enums.Etat;
 
-public class ArticleDAO {
+public class ArticleDAO implements DAO<Article> {
     private final Logger logger = LoggerFactory.getLogger(ArticleDAO.class);
     private final Connection c ;
     public ArticleDAO(Connection nc){
@@ -25,8 +25,8 @@ public class ArticleDAO {
     }
     
 
-    // Ajouter un article
-    public void addArticle(Article a){
+    @Override
+    public void save(Article a){
         String sql = """
                 INSERT INTO article(reference, designation, unite, etat, dateAchat)
                 VALUES(?,?,?,?,?)
@@ -44,8 +44,8 @@ public class ArticleDAO {
         }
     }
 
-    // Récupérer tous les articles
-    public List<Article> getAllArticle(){
+    @Override
+    public List<Article> findAll(){
         String sql = "SELECT * FROM article";
         List<Article> articles = new ArrayList<>();
         try(PreparedStatement stmt = c.prepareStatement(sql)) {
@@ -69,10 +69,10 @@ public class ArticleDAO {
         }
     }
 
-    // Mettre à jour un article
-    public void updateArticle(Article a){
+    @Override
+    public void update(Article a){
         String sql = """
-            UPDATE article 
+            UPDATE article
             SET designation=?, unite=?, etat=?, dateAchat=?
             WHERE reference=?
             """;
@@ -89,7 +89,6 @@ public class ArticleDAO {
         }
     }
 
-    // Recherche par critères (sans idProjet ni quantité)
     public List<Article> searchByCriteria(ArticleSearchCriteria criteria) {
 
         List<Article> resultat = new ArrayList<>();
@@ -149,5 +148,22 @@ public class ArticleDAO {
             logger.error("Erreur lors de la recherche des articles", e);
             return Collections.emptyList();
         }
+    }
+
+    public boolean deleteArticle(String ref) {
+    String sql = "DELETE FROM projet WHERE reference = ?";
+
+    try (PreparedStatement stmt = c.prepareStatement(sql)) {
+        stmt.setString(1, ref);
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        logger.error("Erreur suppression projet {}", ref, e);
+        return false;
+    }
+}
+
+    @Override
+    public boolean delete(int id){
+        throw new UnsupportedOperationException("La suppression peut se faire seulement avec la reference");
     }
 }

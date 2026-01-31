@@ -14,85 +14,33 @@ public class ProjetSearchCriteria {
     private LocalDate dateFinFrom;
     private LocalDate dateFinTo;
 
-    public String getKeyword() {
-        return keyword;
-    }
+    public String getKeyword() { return keyword; }
+    public Integer getIdProjet() { return idProjet; }
+    public LocalDate getDateDevisFrom() { return dateDevisFrom; }
+    public LocalDate getDateDevisTo() { return dateDevisTo; }
+    public LocalDate getDateBCFrom() { return dateBCFrom; }
+    public LocalDate getDateBCTo() { return dateBCTo; }
+    public LocalDate getDateDebutFrom() { return dateDebutFrom; }
+    public LocalDate getDateDebutTo() { return dateDebutTo; }
+    public LocalDate getDateFinFrom() { return dateFinFrom; }
+    public LocalDate getDateFinTo() { return dateFinTo; }
 
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
+    public ProjetSearchCriteria() {}
 
-    public Integer getIdProjet() {
-        return idProjet;
-    }
+    public static class Builder {
+        private final ProjetSearchCriteria criteria = new ProjetSearchCriteria();
 
-    public void setIdProjet(Integer idProjet) {
-        this.idProjet = idProjet;
-    }
+        public Builder keyword(String keyword) { criteria.keyword = keyword; return this; }
+        public Builder idProjet(Integer idProjet) { criteria.idProjet = idProjet; return this; }
+        public Builder dateDevisFrom(LocalDate d) { criteria.dateDevisFrom = d; return this; }
+        public Builder dateDevisTo(LocalDate d) { criteria.dateDevisTo = d; return this; }
+        public Builder dateBCFrom(LocalDate d) { criteria.dateBCFrom = d; return this; }
+        public Builder dateBCTo(LocalDate d) { criteria.dateBCTo = d; return this; }
+        public Builder dateDebutFrom(LocalDate d) { criteria.dateDebutFrom = d; return this; }
+        public Builder dateDebutTo(LocalDate d) { criteria.dateDebutTo = d; return this; }
+        public Builder dateFinFrom(LocalDate d) { criteria.dateFinFrom = d; return this; }
+        public Builder dateFinTo(LocalDate d) { criteria.dateFinTo = d; return this; }
 
-    public LocalDate getDateDevisFrom() {
-        return dateDevisFrom;
+        public ProjetSearchCriteria build() { return criteria; }
     }
-
-    public void setDateDevisFrom(LocalDate dateDevisFrom) {
-        this.dateDevisFrom = dateDevisFrom;
-    }
-
-    public LocalDate getDateDevisTo() {
-        return dateDevisTo;
-    }
-
-    public void setDateDevisTo(LocalDate dateDevisTo) {
-        this.dateDevisTo = dateDevisTo;
-    }
-
-    public LocalDate getDateBCFrom() {
-        return dateBCFrom;
-    }
-
-    public void setDateBCFrom(LocalDate dateBCFrom) {
-        this.dateBCFrom = dateBCFrom;
-    }
-
-    public LocalDate getDateBCTo() {
-        return dateBCTo;
-    }
-
-    public void setDateBCTo(LocalDate dateBCTo) {
-        this.dateBCTo = dateBCTo;
-    }
-
-    public LocalDate getDateDebutFrom() {
-        return dateDebutFrom;
-    }
-
-    public void setDateDebutFrom(LocalDate dateDebutFrom) {
-        this.dateDebutFrom = dateDebutFrom;
-    }
-
-    public LocalDate getDateDebutTo() {
-        return dateDebutTo;
-    }
-
-    public void setDateDebutTo(LocalDate dateDebutTo) {
-        this.dateDebutTo = dateDebutTo;
-    }
-
-    public LocalDate getDateFinFrom() {
-        return dateFinFrom;
-    }
-
-    public void setDateFinFrom(LocalDate dateFinFrom) {
-        this.dateFinFrom = dateFinFrom;
-    }
-
-    public LocalDate getDateFinTo() {
-        return dateFinTo;
-    }
-
-    public void setDateFinTo(LocalDate dateFinTo) {
-        this.dateFinTo = dateFinTo;
-    }
-    
-    
 }

@@ -17,7 +17,7 @@ import mg.cico.models.Projet;
 import mg.cico.models.criteria.ProjetSearchCriteria;
 import mg.cico.models.enums.Statut;
 
-public class ProjetDAO {
+public class ProjetDAO implements DAO<Projet>{
 
     private static final Logger logger = LoggerFactory.getLogger(ProjetDAO.class);
     private final Connection c ;
@@ -25,7 +25,8 @@ public class ProjetDAO {
         this.c = nc;
     }
 
-    public void createProjet(Projet p) {
+    @Override
+    public void save(Projet p) {
         String sql = """
                         INSERT INTO projet (
                             titre, lieu, numeroDevis, dateDevis,
@@ -79,7 +80,9 @@ public class ProjetDAO {
     return p;
 }
 
-public void updateProjet(Projet p) {
+
+    @Override
+    public void update(Projet p) {
     String sql = """
         UPDATE projet SET
             titre = ?,
@@ -123,7 +126,8 @@ public void updateProjet(Projet p) {
 }
 
 
-    public List<Projet> getAllProjet() {
+    @Override
+    public List<Projet> findAll() {
         String query = "SELECT * FROM projet";
         List<Projet> list = new ArrayList<>();
 
@@ -200,5 +204,17 @@ public void updateProjet(Projet p) {
         }
     }
 
+    @Override
+    public boolean delete(int id) {
+    String sql = "DELETE FROM projet WHERE idProjet = ?";
+
+    try (PreparedStatement stmt = c.prepareStatement(sql)) {
+        stmt.setInt(1, id);
+        return stmt.executeUpdate() > 0;
+    } catch (SQLException e) {
+        logger.error("Erreur suppression projet {}", id, e);
+        return false;
+    }
+}
 
 }

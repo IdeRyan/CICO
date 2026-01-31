@@ -134,7 +134,7 @@ class ProjetDAOH2Test {
         projetDAO.createProjet(p);
 
         ProjetSearchCriteria criteria = new ProjetSearchCriteria();
-        criteria.setKeyword("Recherche");
+        criteria.build("Recherche");
 
         List<Projet> results = projetDAO.searchByCriteria(criteria);
         assertFalse(results.isEmpty());
